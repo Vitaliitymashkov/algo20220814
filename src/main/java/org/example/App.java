@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.service.Algo1;
+import org.example.service.util.ElementsGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +16,9 @@ public class App {
     //    private static final int[] input = new int[]{-1073741824, 0, 1073741824}; //Ends with overflow
     //    private static final int[] input = new int[]{-1073741820, 0, 1073741820}; //Ends with overflow
     //    private static final int[] input = new int[]{0, 1, -2147483640}; //Works well
-    private static final int[] input = new int[]{-107374182, 0, 107374182}; //Works well
+//    private static final int[] input = new int[]{-107374182, 0, 107374182}; //Works well
+//    private static final int[] input = ElementsGenerator.generateSequentialPositive(1_000);
+    private static final int[] input = ElementsGenerator.generateSequentialWithDecrementPositive(10_000);
 
     public static void main(String[] args) {
         try {

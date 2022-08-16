@@ -1,9 +1,12 @@
 package org.example.service;
 
+import org.example.service.util.ElementsGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -14,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class Algo1Test {
+    private static final Logger logger = LoggerFactory.getLogger(Algo1Test.class);
 
     @Test
     public void testFindClosestFiguresIndexes_whenOnlyOneElement_thenThrowException() {
@@ -38,6 +42,33 @@ class Algo1Test {
     public void testFindClosestFiguresIndexes_whenTwoEqualElements_thenReturnTheirIndexes() {
         int[] input = new int[]{1, 1};
         int[] expectedResult = new int[]{0, 1};
+        int[] result = new Algo1().findClosestFiguresIndexes(input);
+        assertThat(String.format("Result %s doesn't match expected %s", Arrays.toString(result), Arrays.toString(expectedResult)),
+                result, is(expectedResult));
+    }
+
+    //Algorythm is terribly slow when processing 1_000_000 elements
+    @Test
+    public void testFindClosestFiguresIndexes_when1000SequentialElements_thenReturnTheirIndexesAndControlTiming() {
+        int length = 1_000;
+        logger.trace("Starting generating of input %s", length);
+        int[] input = ElementsGenerator.generateSequentialPositive(length);
+        logger.trace("Starting processing of input");
+
+        int[] expectedResult = new int[]{0, 1};
+        int[] result = new Algo1().findClosestFiguresIndexes(input);
+        assertThat(String.format("Result %s doesn't match expected %s", Arrays.toString(result), Arrays.toString(expectedResult)),
+                result, is(expectedResult));
+    }
+
+    @Test
+    public void testFindClosestFiguresIndexes_when1000DecrementalElements_thenReturnTheirIndexesAndControlTiming() {
+        int length = 1_000;
+        logger.trace("Starting generating of input %s", length);
+        int[] input = ElementsGenerator.generateSequentialWithDecrementPositive(length);
+        logger.trace("Starting processing of input");
+
+        int[] expectedResult = new int[]{998, 999};
         int[] result = new Algo1().findClosestFiguresIndexes(input);
         assertThat(String.format("Result %s doesn't match expected %s", Arrays.toString(result), Arrays.toString(expectedResult)),
                 result, is(expectedResult));

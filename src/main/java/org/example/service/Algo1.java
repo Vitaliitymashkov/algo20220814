@@ -52,6 +52,7 @@ public class Algo1 {
         int firstIndex = 0;
         long minDifference = Integer.MAX_VALUE;
         while (firstIndex < length) {
+            logger.trace("Working with index: " + firstIndex);
             int secondIndex = firstIndex + 1;
             long difference;
             while (secondIndex < length) {
@@ -60,14 +61,17 @@ public class Algo1 {
                 if (checkForEquality(firstIndex, secondIndex, resultsOfComparison, difference)) {
                     break;
                 }
-
                 minDifference = getMinDifference(firstIndex, secondIndex, resultsOfComparison, minDifference, difference);
+//                logger.trace("MinDiff: " + minDifference);
                 secondIndex++;
+//                logger.trace("SecondIndex incremented: " + secondIndex);
             }
+            logger.trace("SecondIndex count finished.");
             if (equalElementsFlag) {
                 break;
             }
             firstIndex++;
+            logger.trace("FirstIndex incremented: " + firstIndex);
         }
         return resultsOfComparison;
     }
