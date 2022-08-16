@@ -51,7 +51,7 @@ class Algo1Test {
     @Test
     public void testFindClosestFiguresIndexes_when1000SequentialElements_thenReturnTheirIndexesAndControlTiming() {
         int length = 1_000;
-        logger.trace("Starting generating of input %s", length);
+        logger.trace("Starting generating of input {}", length);
         int[] input = ElementsGenerator.generateSequentialPositive(length);
         logger.trace("Starting processing of input");
 
@@ -64,7 +64,7 @@ class Algo1Test {
     @Test
     public void testFindClosestFiguresIndexes_when1000DecrementalElements_thenReturnTheirIndexesAndControlTiming() {
         int length = 1_000;
-        logger.trace("Starting generating of input %s", length);
+        logger.trace("Starting generating of input {}", length);
         int[] input = ElementsGenerator.generateSequentialWithDecrementPositive(length);
         logger.trace("Starting processing of input");
 
